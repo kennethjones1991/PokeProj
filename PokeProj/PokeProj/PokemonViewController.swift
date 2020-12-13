@@ -17,7 +17,10 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     
-    var pokemonController = PokemonController()
+    var saveButtonHidden = true
+    var searchBarHidden = true
+    
+    var pokemonController: PokemonController!
     var pokemon: Pokemon?
 
     override func viewDidLoad() {
@@ -30,7 +33,9 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        searchBar.becomeFirstResponder()
+        if !searchBar.isHidden {
+            searchBar.becomeFirstResponder()
+        }
     }
     
     @IBAction func savePokemon(_ sender: Any) {
@@ -47,15 +52,16 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
             downloadImage(from: pokemon.sprite)
             displayArrayData(for: "types", in: typesLabel, from: pokemon.types)
             displayArrayData(for: "abilities", in: abilitiesLabel, from: pokemon.abilities)
-            saveButton.isHidden = false
         } else {
             title = "Pokemon Search"
             pokemonLabel.text = ""
             idLabel.text = ""
             typesLabel.text = ""
             abilitiesLabel.text = ""
-            saveButton.isHidden = true
         }
+        
+        searchBar.isHidden = searchBarHidden
+        saveButton.isHidden = saveButtonHidden
     }
     
     private func displayArrayData(for array: String, in label: UILabel, from data: [String]) {
@@ -93,6 +99,7 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
             DispatchQueue.main.async {
                 do {
                     self.pokemon = try result.get()
+                    self.saveButtonHidden = false
                     self.updateViews()
                 } catch {
                     let alertController = UIAlertController(title: "No Data", message: "This Pokemon doesn't exist", preferredStyle: .alert)

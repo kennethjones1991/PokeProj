@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Pokemon-->
+        <!--Pokedex-->
         <scene sceneID="yHT-Rh-AJz">
             <objects>
                 <tableViewController id="ebk-Bg-XYW" customClass="PokedexTableViewController" customModule="PokeProj" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                             <outlet property="delegate" destination="ebk-Bg-XYW" id="Irz-je-Qqe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Pokemon" id="qmP-j1-BJM">
+                    <navigationItem key="navigationItem" title="Pokedex" id="qmP-j1-BJM">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Tej-Cz-RwT">
                             <connections>
                                 <segue destination="8nH-gv-ckY" kind="show" identifier="SearchSegue" id="oIf-KH-4Q2"/>
@@ -167,7 +167,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oIf-KH-4Q2"/>
+        <segue reference="epP-bH-zIy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
