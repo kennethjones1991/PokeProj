@@ -12,19 +12,28 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var pokemonLabel: UILabel!
     @IBOutlet weak var spriteView: UIImageView!
-    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var typesLabel: UILabel!
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var forestView: UIImageView!
     
     var saveButtonHidden = true
     var searchBarHidden = true
     
     var pokemonController: PokemonController!
-    var pokemon: Pokemon?
+    var pokemon: PokemonRepresentation?
+    var savedPokemon: Pokemon?
+    var sprite: Data?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        forestView.image = UIImage(named: "forest")
+        forestView.contentMode = .scaleAspectFill
+        
+        saveButton.backgroundColor = UIColor(hue: 190/360, saturation: 70/100, brightness: 80/100, alpha: 1.0)
+        saveButton.tintColor = .white
+        saveButton.layer.cornerRadius = 8.0
 
         searchBar.delegate = self
         updateViews()
@@ -40,22 +49,38 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
     
     @IBAction func savePokemon(_ sender: Any) {
         guard let pokemon = pokemon else { return }
-        pokemonController.pokemon.append(pokemon)
+        
+        Pokemon(id: pokemon.id, name: pokemon.name, types: pokemon.types, abilities: pokemon.abilities, sprite: sprite)
+        
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            NSLog("Error saving managed object context: \(error)")
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
     private func updateViews() {
         if let pokemon = pokemon {
             title = pokemon.name.capitalized
-            pokemonLabel.text = pokemon.name.capitalized
-            idLabel.text = "ID: \(pokemon.id)"
+            pokemonLabel.text = "\(pokemon.id) - \(pokemon.name.capitalized)"
             downloadImage(from: pokemon.sprite)
             displayArrayData(for: "types", in: typesLabel, from: pokemon.types)
             displayArrayData(for: "abilities", in: abilitiesLabel, from: pokemon.abilities)
+        } else if let pokemon = savedPokemon,
+                  let name = pokemon.name,
+                  let sprite = pokemon.sprite,
+                  let types = pokemon.types,
+                  let abilities = pokemon.abilities {
+            title = name.capitalized
+            pokemonLabel.text = "\(pokemon.id) - \(name.capitalized)"
+            spriteView.image = UIImage(data: sprite)
+            displayArrayData(for: "types", in: typesLabel, from: types)
+            displayArrayData(for: "abilities", in: abilitiesLabel, from: abilities)
         } else {
             title = "Pokemon Search"
             pokemonLabel.text = ""
-            idLabel.text = ""
             typesLabel.text = ""
             abilitiesLabel.text = ""
         }
@@ -85,6 +110,7 @@ class PokemonViewController: UIViewController, UISearchBarDelegate {
         getData(from: url) { (data, _, error) in
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async { [weak self] in
+                self?.sprite = UIImage(data: data)?.pngData()
                 self?.spriteView.image = UIImage(data: data)
             }
         }

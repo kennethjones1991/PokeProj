@@ -1,5 +1,5 @@
 //
-//  Pokemon.swift
+//  PokemonRepresentation.swift
 //  PokeProj
 //
 //  Created by Kenneth Jones on 12/11/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pokemon: Codable {
+struct PokemonRepresentation: Codable {
     let id: Int
     let name: String
     let types: [String]
