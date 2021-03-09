@@ -61,7 +61,6 @@ class PokedexTableViewController: UITableViewController, NSFetchedResultsControl
             
             do {
                 try moc.save()
-                tableView.reloadData()
             } catch {
                 moc.reset()
                 NSLog("Error saving managed object context: \(error)")

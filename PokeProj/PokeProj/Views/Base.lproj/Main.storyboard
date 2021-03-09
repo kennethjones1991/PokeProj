@@ -27,8 +27,8 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VWI-Y0-MRA">
                                             <rect key="frame" x="20" y="8" width="80" height="90"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="47r-ID-1sz"/>
-                                                <constraint firstAttribute="height" constant="80" id="i61-u9-z1w"/>
+                                                <constraint firstAttribute="height" constant="80" id="2lq-vi-Xb2"/>
+                                                <constraint firstAttribute="width" constant="80" id="G8A-Ru-hRB"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcS-YG-rYH">
@@ -47,12 +47,12 @@
                                     <constraints>
                                         <constraint firstItem="dUE-Lk-CQK" firstAttribute="top" secondItem="TcS-YG-rYH" secondAttribute="bottom" constant="8" id="1ZB-NO-E6G"/>
                                         <constraint firstItem="TcS-YG-rYH" firstAttribute="leading" secondItem="VWI-Y0-MRA" secondAttribute="trailing" constant="8" id="1bC-7q-bBq"/>
+                                        <constraint firstAttribute="bottom" secondItem="VWI-Y0-MRA" secondAttribute="bottom" constant="8" id="5Me-4f-em3"/>
                                         <constraint firstAttribute="trailing" secondItem="dUE-Lk-CQK" secondAttribute="trailing" constant="20" id="6cH-ry-2Iy"/>
                                         <constraint firstAttribute="trailing" secondItem="TcS-YG-rYH" secondAttribute="trailing" constant="20" id="72V-wS-rwJ"/>
-                                        <constraint firstItem="VWI-Y0-MRA" firstAttribute="top" secondItem="YOu-ct-k5D" secondAttribute="top" constant="8" id="FPw-dx-cwR"/>
                                         <constraint firstItem="TcS-YG-rYH" firstAttribute="top" secondItem="YOu-ct-k5D" secondAttribute="top" constant="8" id="GCN-9L-LAn"/>
                                         <constraint firstItem="dUE-Lk-CQK" firstAttribute="leading" secondItem="VWI-Y0-MRA" secondAttribute="trailing" constant="8" id="S6y-XC-7Ul"/>
-                                        <constraint firstAttribute="bottom" secondItem="VWI-Y0-MRA" secondAttribute="bottom" constant="8" id="nMP-YP-yn4"/>
+                                        <constraint firstItem="VWI-Y0-MRA" firstAttribute="top" secondItem="YOu-ct-k5D" secondAttribute="top" constant="8" id="i46-AE-l6f"/>
                                         <constraint firstItem="VWI-Y0-MRA" firstAttribute="leading" secondItem="YOu-ct-k5D" secondAttribute="leading" constant="20" id="qgt-gg-RXZ"/>
                                     </constraints>
                                 </tableViewCellContentView>
